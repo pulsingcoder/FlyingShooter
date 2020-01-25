@@ -422,15 +422,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 124961642, guid: a007366fde2540d4196f8649149db09f, type: 3}
       propertyPath: m_Constraints
-      value: 56
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 124961642, guid: a007366fde2540d4196f8649149db09f, type: 3}
       propertyPath: m_Mass
-      value: 0.07
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 124961642, guid: a007366fde2540d4196f8649149db09f, type: 3}
       propertyPath: m_Drag
-      value: 0.1
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 124961643, guid: a007366fde2540d4196f8649149db09f, type: 3}
+      propertyPath: rcsThrust
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 124961643, guid: a007366fde2540d4196f8649149db09f, type: 3}
+      propertyPath: mainThrust
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6887684314789569852, guid: a007366fde2540d4196f8649149db09f,
         type: 3}
