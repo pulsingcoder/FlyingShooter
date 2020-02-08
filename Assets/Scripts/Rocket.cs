@@ -61,4 +61,23 @@ public class Rocket : MonoBehaviour
             rb.freezeRotation = false; // resume physisc control of rotation
         }
     }
+    void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Friendly":
+                // do nothing now
+                print("Friendly");
+                break;
+            case "Fuel":
+                // do nothing now
+                print("Fuel");
+                break;
+            default:
+                print("Dead");
+                // kill player
+                break;
+        }
+
+    }
 }
