@@ -220,8 +220,18 @@ PrefabInstance:
     - target: {fileID: 186536318720890695, guid: 34ec1c97c982fa648ad5f4cbf323688b,
         type: 3}
       propertyPath: m_Name
-      value: LaunchPad (1)
+      value: Landing Pad
       objectReference: {fileID: 0}
+    - target: {fileID: 186536318720890695, guid: 34ec1c97c982fa648ad5f4cbf323688b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Finish
+      objectReference: {fileID: 0}
+    - target: {fileID: 186536318720890713, guid: 34ec1c97c982fa648ad5f4cbf323688b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6dafe89336d05174695171fbfd1d4630, type: 2}
     - target: {fileID: 186536318720890715, guid: 34ec1c97c982fa648ad5f4cbf323688b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2045,7 +2055,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 124961642, guid: a007366fde2540d4196f8649149db09f, type: 3}
       propertyPath: m_Constraints
-      value: 72
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 124961642, guid: a007366fde2540d4196f8649149db09f, type: 3}
       propertyPath: m_Mass

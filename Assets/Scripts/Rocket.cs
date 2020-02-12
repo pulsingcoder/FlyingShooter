@@ -2,9 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Rocket : MonoBehaviour
 {
+    static int currentScene = 0;
     [SerializeField] float mainThrust = 100f;
     [SerializeField] float rcsThrust = 100f;
     Rigidbody rb;
@@ -69,13 +70,14 @@ public class Rocket : MonoBehaviour
                 // do nothing now
                 print("Friendly");
                 break;
-            case "Fuel":
+            case "Finish":
                 // do nothing now
-                print("Fuel");
+                SceneManager.LoadScene(1);
+                currentScene = 1;
                 break;
             default:
                 print("Dead");
-                // kill player
+                SceneManager.LoadScene(currentScene);
                 break;
         }
 
