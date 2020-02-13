@@ -10,14 +10,17 @@ public class Rocket : MonoBehaviour
     [SerializeField] float rcsThrust = 100f;
    
     Rigidbody rb;
-    AudioSource audio; 
+    AudioSource audioSource;
+    [SerializeField] AudioClip dealthClip;
+    [SerializeField] AudioClip thrustClip;
+    [SerializeField] AudioClip successClip;
     enum State { Alive, Dying, Trancending}
-    State state = State.Alive;
+     State state = State.Alive;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         
     }
 
@@ -25,33 +28,48 @@ public class Rocket : MonoBehaviour
     void Update()
     {
         ProcessInput();
+        
     }
 
     private void ProcessInput()
     {
         if (state == State.Alive)
         {
-            Thrust();
-            Rotate();
+
+
+            RespondToThrust();
+            RespondToRotate();
         }
+       
+       
     }
-    private void Thrust()
+    private void RespondToThrust()
     {
-        if (Input.GetKey(KeyCode.Space) || (SimpleInput.GetAxis("Vertical")!=0)) // Can Rotate with thrust
+        ApplyThrust();
+    }
+
+    private void ApplyThrust()
+    {
+        if (Input.GetKey(KeyCode.Space) || (SimpleInput.GetAxis("Vertical") != 0)) // Can Rotate with thrust
         {
             rb.AddRelativeForce(Vector3.up * mainThrust);
-            if (!audio.isPlaying)
+
+            if (!audioSource.isPlaying )
             {
-                audio.Play();
+                
+                
+                    audioSource.PlayOneShot(thrustClip);
+                
+                
             }
         }
         else
         {
-            audio.Stop();
+            audioSource.Stop();
         }
     }
 
-    private void Rotate()
+    private void RespondToRotate()
     {
         rb.freezeRotation = true; // take manual control of rotation 
         
@@ -78,32 +96,47 @@ public class Rocket : MonoBehaviour
         {
             case "Friendly":
                 // do nothing now
-                print("Friendly");
+                
                 break;
             case "Finish":
                 // do nothing now
-                state = State.Trancending;
-                Invoke("LoadNextLevel", 1f);
-                
-                LoadNextLevel(); break;
+                StartSuccessSequence(); break;
             default:
-                state = State.Dying;
-                Invoke("PlayerDeath", 1f);
-                
+                StartDeathSequence();
+
                 break;
         }
 
     }
 
+    private void StartDeathSequence()
+    {
+        state = State.Dying;
+        audioSource.Stop();
+        audioSource.PlayOneShot(dealthClip);
+        Invoke("PlayerDeath", 1f);
+    }
+
+    private void StartSuccessSequence()
+    {
+        state = State.Trancending;
+        audioSource.Stop();
+        audioSource.PlayOneShot(successClip);
+        Invoke("LoadNextLevel", 1f);
+
+       
+    }
+
     private  void PlayerDeath()
     {
         SceneManager.LoadScene(currentScene);
+        
     }
 
     private void LoadNextLevel()
     {
         SceneManager.LoadScene(1);
-        state = State.Alive;
+        
         currentScene = 1;
     }
 }

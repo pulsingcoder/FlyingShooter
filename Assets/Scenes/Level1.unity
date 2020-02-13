@@ -1513,7 +1513,7 @@ PrefabInstance:
     - target: {fileID: 186536318720890715, guid: 34ec1c97c982fa648ad5f4cbf323688b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29.899998
+      value: 45.2
       objectReference: {fileID: 0}
     - target: {fileID: 186536318720890715, guid: 34ec1c97c982fa648ad5f4cbf323688b,
         type: 3}
@@ -1906,6 +1906,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Terrain
       objectReference: {fileID: 0}
+    - target: {fileID: 3460688215891553768, guid: 36d6c87859735d442ab4e65a5fe576e9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Friendly
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36d6c87859735d442ab4e65a5fe576e9, type: 3}
 --- !u!1001 &3794336742514921089
@@ -2122,34 +2127,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 124961642, guid: a007366fde2540d4196f8649149db09f, type: 3}
-      propertyPath: m_Constraints
-      value: 56
-      objectReference: {fileID: 0}
-    - target: {fileID: 124961642, guid: a007366fde2540d4196f8649149db09f, type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 124961642, guid: a007366fde2540d4196f8649149db09f, type: 3}
-      propertyPath: m_Drag
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 124961642, guid: a007366fde2540d4196f8649149db09f, type: 3}
-      propertyPath: m_UseGravity
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 124961643, guid: a007366fde2540d4196f8649149db09f, type: 3}
-      propertyPath: rcsThrust
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 124961643, guid: a007366fde2540d4196f8649149db09f, type: 3}
-      propertyPath: mainThrust
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 124961643, guid: a007366fde2540d4196f8649149db09f, type: 3}
-      propertyPath: joystick
+      propertyPath: successClip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: d4d5bf08b913d134d80f173ed0b8db41, type: 3}
     - target: {fileID: 6887684314789569852, guid: a007366fde2540d4196f8649149db09f,
         type: 3}
       propertyPath: m_Name
@@ -2158,7 +2139,7 @@ PrefabInstance:
     - target: {fileID: 6887684314789569853, guid: a007366fde2540d4196f8649149db09f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.8
+      value: 71.8
       objectReference: {fileID: 0}
     - target: {fileID: 6887684314789569853, guid: a007366fde2540d4196f8649149db09f,
         type: 3}
