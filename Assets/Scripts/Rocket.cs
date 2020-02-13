@@ -8,8 +8,11 @@ public class Rocket : MonoBehaviour
     static int currentScene = 0;
     [SerializeField] float mainThrust = 100f;
     [SerializeField] float rcsThrust = 100f;
+   
     Rigidbody rb;
     AudioSource audio; 
+    enum State { Alive, Dying, Trancending}
+    State state = State.Alive;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,12 +29,15 @@ public class Rocket : MonoBehaviour
 
     private void ProcessInput()
     {
-        Thrust();
-        Rotate();
+        if (state == State.Alive)
+        {
+            Thrust();
+            Rotate();
+        }
     }
     private void Thrust()
     {
-        if (Input.GetKey(KeyCode.Space)) // Can Rotate with thrust
+        if (Input.GetKey(KeyCode.Space) || (SimpleInput.GetAxis("Vertical")!=0)) // Can Rotate with thrust
         {
             rb.AddRelativeForce(Vector3.up * mainThrust);
             if (!audio.isPlaying)
@@ -49,13 +55,13 @@ public class Rocket : MonoBehaviour
     {
         rb.freezeRotation = true; // take manual control of rotation 
         
-
-        if (Input.GetKey(KeyCode.A)) // can rotate in left
+        
+        if (Input.GetKey(KeyCode.A) || (SimpleInput.GetAxis("Horizontal")<0)) // can rotate in left
         {
             float rotateThisFrame = rcsThrust * Time.deltaTime;
             transform.Rotate(Vector3.forward * rotateThisFrame);
         }
-        else if (Input.GetKey(KeyCode.D)) // can rotate in right
+        else if (Input.GetKey(KeyCode.D) || (SimpleInput.GetAxis("Horizontal") > 0)) // can rotate in right
         {
             float rotateThisFrame = rcsThrust * Time.deltaTime;
             transform.Rotate(-Vector3.forward * rotateThisFrame);
@@ -64,6 +70,10 @@ public class Rocket : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
+        if (state != State.Alive)
+        {
+            return ;
+        }
         switch (collision.gameObject.tag)
         {
             case "Friendly":
@@ -72,14 +82,28 @@ public class Rocket : MonoBehaviour
                 break;
             case "Finish":
                 // do nothing now
-                SceneManager.LoadScene(1);
-                currentScene = 1;
-                break;
+                state = State.Trancending;
+                Invoke("LoadNextLevel", 1f);
+                
+                LoadNextLevel(); break;
             default:
-                print("Dead");
-                SceneManager.LoadScene(currentScene);
+                state = State.Dying;
+                Invoke("PlayerDeath", 1f);
+                
                 break;
         }
 
+    }
+
+    private  void PlayerDeath()
+    {
+        SceneManager.LoadScene(currentScene);
+    }
+
+    private void LoadNextLevel()
+    {
+        SceneManager.LoadScene(1);
+        state = State.Alive;
+        currentScene = 1;
     }
 }
