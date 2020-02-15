@@ -14,6 +14,9 @@ public class Rocket : MonoBehaviour
     [SerializeField] AudioClip dealthClip;
     [SerializeField] AudioClip thrustClip;
     [SerializeField] AudioClip successClip;
+    [SerializeField] ParticleSystem dealthParticle;
+    [SerializeField] ParticleSystem thrustParticle;
+    [SerializeField] ParticleSystem successParticle;
     enum State { Alive, Dying, Trancending}
      State state = State.Alive;
     // Start is called before the first frame update
@@ -62,9 +65,11 @@ public class Rocket : MonoBehaviour
                 
                 
             }
+            thrustParticle.Play();
         }
         else
         {
+            thrustParticle.Stop();
             audioSource.Stop();
         }
     }
@@ -113,6 +118,7 @@ public class Rocket : MonoBehaviour
     {
         state = State.Dying;
         audioSource.Stop();
+        dealthParticle.Play();
         audioSource.PlayOneShot(dealthClip);
         Invoke("PlayerDeath", 1f);
     }
@@ -122,6 +128,7 @@ public class Rocket : MonoBehaviour
         state = State.Trancending;
         audioSource.Stop();
         audioSource.PlayOneShot(successClip);
+        successParticle.Play();
         Invoke("LoadNextLevel", 1f);
 
        
@@ -130,7 +137,7 @@ public class Rocket : MonoBehaviour
     private  void PlayerDeath()
     {
         SceneManager.LoadScene(currentScene);
-        
+      
     }
 
     private void LoadNextLevel()
