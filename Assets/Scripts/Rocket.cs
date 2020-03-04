@@ -8,7 +8,7 @@ public class Rocket : MonoBehaviour
     static int currentScene = 0;
     [SerializeField] float mainThrust = 100f;
     [SerializeField] float rcsThrust = 100f;
-   
+    [SerializeField] float levelLoadDelay = 2f;
     Rigidbody rb;
     AudioSource audioSource;
     [SerializeField] AudioClip dealthClip;
@@ -55,7 +55,7 @@ public class Rocket : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space) || (SimpleInput.GetAxis("Vertical") != 0)) // Can Rotate with thrust
         {
-            rb.AddRelativeForce(Vector3.up * mainThrust);
+            rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
 
             if (!audioSource.isPlaying )
             {
@@ -120,7 +120,7 @@ public class Rocket : MonoBehaviour
         audioSource.Stop();
         dealthParticle.Play();
         audioSource.PlayOneShot(dealthClip);
-        Invoke("PlayerDeath", 1f);
+        Invoke("PlayerDeath", levelLoadDelay);
     }
 
     private void StartSuccessSequence()
@@ -129,7 +129,7 @@ public class Rocket : MonoBehaviour
         audioSource.Stop();
         audioSource.PlayOneShot(successClip);
         successParticle.Play();
-        Invoke("LoadNextLevel", 1f);
+        Invoke("LoadNextLevel", levelLoadDelay);
 
        
     }

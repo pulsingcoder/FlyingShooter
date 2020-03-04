@@ -945,8 +945,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426f58f7827243047b7afef3022e0f1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainThrust: 20
+  mainThrust: 1000
   rcsThrust: 200
+  levelLoadDelay: 2
   dealthClip: {fileID: 8300000, guid: ebf23d915a3b51849b1a0630a3c82e91, type: 3}
   thrustClip: {fileID: 8300000, guid: 48432b048d4080d4aafe4ad0aa3bbb0b, type: 3}
   successClip: {fileID: 8300000, guid: d4d5bf08b913d134d80f173ed0b8db41, type: 3}
