@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Rocket : MonoBehaviour
 {
-    static int currentScene = 0;
+    
     [SerializeField] float mainThrust = 100f;
     [SerializeField] float rcsThrust = 100f;
     [SerializeField] float levelLoadDelay = 2f;
@@ -136,14 +136,16 @@ public class Rocket : MonoBehaviour
 
     private  void PlayerDeath()
     {
-        SceneManager.LoadScene(currentScene);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
       
     }
 
     private void LoadNextLevel()
     {
-        SceneManager.LoadScene(1);
+        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = (currentIndex + 1) % SceneManager.sceneCountInBuildSettings;
+        SceneManager.LoadScene(nextSceneIndex);
         
-        currentScene = 1;
+        
     }
 }
