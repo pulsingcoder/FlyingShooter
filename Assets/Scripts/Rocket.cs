@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class Rocket : MonoBehaviour
 {
-    
+    static float score=0f;
+    float prevScore;
+    [SerializeField]
+    Text scoreText;    
     [SerializeField] float mainThrust = 100f;
     [SerializeField] float rcsThrust = 100f;
     [SerializeField] float levelLoadDelay = 2f;
@@ -14,6 +18,7 @@ public class Rocket : MonoBehaviour
     [SerializeField] AudioClip dealthClip;
     [SerializeField] AudioClip thrustClip;
     [SerializeField] AudioClip successClip;
+    [SerializeField] AudioClip coinClip;
     [SerializeField] ParticleSystem dealthParticle;
     [SerializeField] ParticleSystem thrustParticle;
     [SerializeField] ParticleSystem successParticle;
@@ -24,6 +29,8 @@ public class Rocket : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+        scoreText.text = score.ToString();
+        prevScore = score;
         
     }
 
@@ -106,12 +113,28 @@ public class Rocket : MonoBehaviour
             case "Finish":
                 // do nothing now
                 StartSuccessSequence(); break;
+            case "Coin":
+                // destroy the coin
+                DestroyCoin(collision.gameObject);
+                 break;
             default:
                 StartDeathSequence();
 
                 break;
         }
 
+    }
+
+    private void DestroyCoin(GameObject coin)
+    {
+        score += 5;
+        if (audioSource.isPlaying)
+        audioSource.Stop();
+        Destroy(coin);
+        audioSource.PlayOneShot(successClip);
+        scoreText.text = score.ToString();
+       
+       
     }
 
     private void StartDeathSequence()
@@ -136,6 +159,7 @@ public class Rocket : MonoBehaviour
 
     private  void PlayerDeath()
     {
+        score = prevScore;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
       
     }
