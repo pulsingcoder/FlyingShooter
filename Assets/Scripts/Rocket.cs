@@ -128,7 +128,7 @@ public class Rocket : MonoBehaviour
     private void DestroyCoin(GameObject coin)
     {
         score += 5;
-        if (audioSource.isPlaying)
+       if (audioSource.isPlaying)
         audioSource.Stop();
         Destroy(coin);
         audioSource.PlayOneShot(successClip);
